@@ -16,11 +16,11 @@ from fastapi_poe.types import QueryRequest
 from sse_starlette.sse import ServerSentEvent
 
 
-bot_id_pattern = re.compile("\[(?P<bot_id>[a-zA-Z0-9\-]{4,15})\]$")
+bot_id_pattern = re.compile("@(?P<bot_id>[a-zA-Z0-9\-]{4,15})$")
 # use a 3-letter name so it can't collide with a bot name
 user_id = "Mod"
 starting_prompt = f"You are in a group discussion moderated by {user_id}."
-who_speaks_next_response = "(Which bot do you want to respond with next? Type their name in brackets, like [Sage])"
+who_speaks_next_response = "(Which bot do you want to respond with next? Type their name with an @ in front, like `@Sage`)"
 
 
 def identify_bot_id(message: str) -> Optional[str]:
@@ -106,7 +106,7 @@ class PopcornBot(PoeBot):
             print(f"caught exception {e} while talking to {current_bot_id}")
 
         for bot_id in sorted(bots_in_convo.union({"Sage", "Claude-instant"})):
-            yield self.suggested_reply_event(f"[{bot_id}]")
+            yield self.suggested_reply_event(f"@{bot_id}")
 
 
 if __name__ == "__main__":
