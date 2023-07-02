@@ -33,7 +33,7 @@ bot = PopcornBot()
 
 # specific to hosting with modal.com
 image = Image.debian_slim().pip_install_from_requirements("requirements.txt")
-stub = Stub("poe-bot-quickstart")
+stub = Stub("poe-groupchat")
 
 
 @stub.function(image=image)
