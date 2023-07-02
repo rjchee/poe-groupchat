@@ -60,7 +60,7 @@ class PopcornBot(PoeBot):
         if current_bot_id is None:
             yield self.text_event(who_speaks_next_response)
             for bot_id in sorted(bots_in_convo.union({"Sage", "Claude-instant"})):
-                yield self.suggested_reply_event(f"[{bot_id}]")
+                yield self.suggested_reply_event(f"@{bot_id}")
             return
 
         # build query for the bot
